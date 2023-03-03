@@ -15,4 +15,4 @@ in vaadin create 3 pages and I can go from first page to second and second to th
 in Vaadin create 2 custom reusable components and use these 2 components into a main page
 
 ----------------005-------------------
-
+Component 2 should send some message which should be received in component 1
