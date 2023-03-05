@@ -18,6 +18,9 @@ in Vaadin create 2 custom reusable components and use these 2 components into a 
 Component 2 should send some message which should be received in component 1
 
 ----------------006-----------------
+we will have Text Field for First Name,Last Name and email id of Person and one button to save. 
+We will have a grid to show the Person which are saved. 
+----------------007-----------------
 Create 2 vaadin component in one component we will have Text Field for First Name,Last Name and email id of Person and one button to save. 
 In Second component we will have a grid to show the Person which are saved in component one. 
 Both component should be part on MainView
