@@ -6,10 +6,13 @@ import java.util.List;
 import com.vib.vaadin.view.Person;
 
 public class DataService {
+	private static List<Person> list = new ArrayList<>();
 	public static List<Person> getPeople(){
-		List<Person> list = new ArrayList<>();
-		
-        Person p1=new Person(1,"John", "Doe", "john.doe@example.com");
+		return list;
+	}
+	
+	public static void addDummyPerson() {
+		Person p1=new Person(1,"John", "Doe", "john.doe@example.com");
 		Person p2=new Person(2,"Jane", "Doe", "jane.doe@example.com");
 		Person p3=new Person(3,"Bob", "Smith", "bob.smith@example.com");
 		Person p4=new Person(4,"Alice", "Johnson", "alice.johnson@example.com");
@@ -21,7 +24,14 @@ public class DataService {
 		list.add(p3);
 		list.add(p4);
 		list.add(p5);
-		return list;
+	}
+	
+	public static void addPeople(Person p){
+		list.add(p);
+	}
+	
+	public static void clear() {
+		list.clear();
 	}
 }
 
