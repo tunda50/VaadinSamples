@@ -28,6 +28,7 @@ public class TabView2 extends Div {
 	
 
 	public TabView2() {
+		DataService.clear();
 		DataService.addDummyPerson();
 		Tabs tabs = new Tabs();
 

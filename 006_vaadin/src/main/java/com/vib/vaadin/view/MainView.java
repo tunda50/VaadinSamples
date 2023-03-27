@@ -22,6 +22,11 @@ public class MainView  extends VerticalLayout {
          Button simpleGrid = new Button("Simple Grid");
          simpleGrid.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("simple-grid")));
         
+         Button gridEditBtn = new Button("Grid Edit");
+         gridEditBtn.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("grid-edit")));
+        
+         
+         
          Button simpleGrid2 = new Button("Simple Grid With Custom Headers");
          simpleGrid2.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("simple-grid-2")));
         
@@ -41,7 +46,7 @@ public class MainView  extends VerticalLayout {
          Button btnTabs3 = new Button("Tabs3");
          btnTabs3.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("tabs3")));
         
-         add(simpleGrid,simpleGrid2,nextButton2,gridContent,btnTabs,btnTabs2,btnTabs3);
+         add(simpleGrid,gridEditBtn,simpleGrid2,nextButton2,gridContent,btnTabs,btnTabs2,btnTabs3);
     }
 
 }
