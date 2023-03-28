@@ -46,7 +46,12 @@ public class MainView  extends VerticalLayout {
          Button btnTabs3 = new Button("Tabs3");
          btnTabs3.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("tabs3")));
         
-         add(simpleGrid,gridEditBtn,simpleGrid2,nextButton2,gridContent,btnTabs,btnTabs2,btnTabs3);
+         
+         Button btnCustomLayout = new Button("CustomVerticalLayoutTest");
+         btnCustomLayout.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("custom-vertical-layout-test")));
+        
+         
+         add(simpleGrid,gridEditBtn,simpleGrid2,nextButton2,gridContent,btnTabs,btnTabs2,btnTabs3,btnCustomLayout);
     }
 
 }
