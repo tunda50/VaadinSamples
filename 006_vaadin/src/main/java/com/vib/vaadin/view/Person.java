@@ -2,46 +2,45 @@ package com.vib.vaadin.view;
 
 import java.util.Date;
 
-import javax.annotation.Nonnull;
 
 public class Person {
 
-    @Nonnull
+    
     private String firstName;
 
-    @Nonnull
+    
     private String lastName;
 
-    @Nonnull
+    
     private String email;
 
-    @Nonnull
+    
     private Date birthday;
 
-    @Nonnull
+    
     private Integer id;
 
-    @Nonnull
+    
     private boolean subscriber;
 
-    @Nonnull
+    
     private String membership;
 
-    @Nonnull
+    
     private String pictureUrl;
 
-    @Nonnull
+    
     private String profession;
 
-    @Nonnull
+    
     private Address address;
 
     private Integer managerId;
 
-    @Nonnull
+    
     private boolean manager;
 
-    @Nonnull
+    
     private String status;
 
    
@@ -160,6 +159,12 @@ public class Person {
         }
         Person other = (Person) obj;
         return id == other.id;
+    }
+    
+    
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
     }
 
     public Integer getManagerId() {

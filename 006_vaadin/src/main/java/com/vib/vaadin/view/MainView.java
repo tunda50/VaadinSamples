@@ -50,8 +50,37 @@ public class MainView  extends VerticalLayout {
          Button btnCustomLayout = new Button("CustomVerticalLayoutTest");
          btnCustomLayout.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("custom-vertical-layout-test")));
         
+         Button btnWarningMessage = new Button("warning-message");
+         btnWarningMessage.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("warning-message")));
+        
+         Button btnWarningMessage2 = new Button("warning-message2");
+         btnWarningMessage2.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("warning-message2")));
+        
+         Button btnWarningMessage3 = new Button("notification-error");
+         btnWarningMessage3.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("notification-error")));
+        
+         Button btnGridDetail = new Button("grid-item-details");
+         btnGridDetail.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("grid-item-details")));
+        
+         Button btnScrollBar = new Button("grid-scrollbar");
+         btnScrollBar.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("grid-scrollbar")));
+        
          
-         add(simpleGrid,gridEditBtn,simpleGrid2,nextButton2,gridContent,btnTabs,btnTabs2,btnTabs3,btnCustomLayout);
+         Button btnPersonGrid = new Button("person-grid");
+         btnPersonGrid.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("person-grid")));
+        
+         Button listboxmultiselection = new Button("list-box-multi-selection");
+         listboxmultiselection.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("list-box-multi-selection")));
+        
+         Button multiselect = new Button("multiselect");
+         multiselect.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("multiselect")));
+        
+         
+         
+         
+         add(simpleGrid,gridEditBtn,simpleGrid2,nextButton2,gridContent,btnTabs,btnTabs2,btnTabs3
+        		 ,btnCustomLayout,btnWarningMessage,
+        		 btnWarningMessage2,btnWarningMessage3,btnGridDetail,btnScrollBar,btnPersonGrid,listboxmultiselection,multiselect);
     }
 
 }
