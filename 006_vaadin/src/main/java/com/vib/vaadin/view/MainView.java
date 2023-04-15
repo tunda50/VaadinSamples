@@ -75,12 +75,18 @@ public class MainView  extends VerticalLayout {
          Button multiselect = new Button("multiselect");
          multiselect.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("multiselect")));
         
+         Button binderExample = new Button("binderExample");
+         binderExample.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("binderExample")));
+        
+         Button binderExample2 = new Button("binderExample2");
+         binderExample2.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("binderExample2")));
+        
          
          
          
          add(simpleGrid,gridEditBtn,simpleGrid2,nextButton2,gridContent,btnTabs,btnTabs2,btnTabs3
         		 ,btnCustomLayout,btnWarningMessage,
-        		 btnWarningMessage2,btnWarningMessage3,btnGridDetail,btnScrollBar,btnPersonGrid,listboxmultiselection,multiselect);
+        		 btnWarningMessage2,btnWarningMessage3,btnGridDetail,btnScrollBar,btnPersonGrid,listboxmultiselection,multiselect,binderExample,binderExample2);
     }
 
 }
