@@ -81,12 +81,16 @@ public class MainView  extends VerticalLayout {
          Button binderExample2 = new Button("binderExample2");
          binderExample2.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("binderExample2")));
         
+         Button validatorExample = new Button("validatorExample");
+         validatorExample.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("validatorExample")));
+        
+         
          
          
          
          add(simpleGrid,gridEditBtn,simpleGrid2,nextButton2,gridContent,btnTabs,btnTabs2,btnTabs3
         		 ,btnCustomLayout,btnWarningMessage,
-        		 btnWarningMessage2,btnWarningMessage3,btnGridDetail,btnScrollBar,btnPersonGrid,listboxmultiselection,multiselect,binderExample,binderExample2);
+        		 btnWarningMessage2,btnWarningMessage3,btnGridDetail,btnScrollBar,btnPersonGrid,listboxmultiselection,multiselect,binderExample,binderExample2,validatorExample);
     }
 
 }

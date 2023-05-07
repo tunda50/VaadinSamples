@@ -46,11 +46,6 @@ public class BinderExample extends VerticalLayout {
         	person.setName("Vibhor");
         	System.out.println("Main View before read bean:"+person);
         	binder.readBean(person);
-//        	try {
-//				binder.writeBean(person);
-//			} catch (ValidationException e1) {
-//				e1.printStackTrace();
-//			}
         	System.out.println("Main View after read bean:"+person);
         });
         add(textBox1, button1,button2);
