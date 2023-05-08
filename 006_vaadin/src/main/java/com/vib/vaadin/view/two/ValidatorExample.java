@@ -6,19 +6,16 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.binder.Binder;
-import com.vaadin.flow.data.binder.ValidationException;
-import com.vaadin.flow.data.binder.ValidationResult;
-import com.vaadin.flow.data.binder.Validator;
-import com.vaadin.flow.data.binder.ValueContext;
+import com.vaadin.flow.data.binder.*;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 import com.vib.vaadin.view.Person;
 import com.vib.vaadin.view.two.validators.NameValidator;
+import com.vib.vaadin.view.two.validators.NameValidatorVaadin;
 
 
 @Route("validatorExample")
-public class ValidatorExample extends BaseView {
+public class ValidatorExample extends BaseView<Person> {
     
    
 
@@ -26,7 +23,7 @@ public class ValidatorExample extends BaseView {
     public ValidatorExample() {
     	
     	Person p = new Person("vibhor", "bhardwaj", "vibhor.bhardwaj@gmail.com");
-    	
+
     	TextField nameField = getTextField("Name", "Enter Name",new NameValidator(p) {
 			
 			@Override
@@ -39,8 +36,24 @@ public class ValidatorExample extends BaseView {
 				System.out.println("Show Error with message"+ text);
 			}
 		});
-    	
-        add(nameField);
+
+		Validator<String> nameValidatorVaadin = new NameValidatorVaadin(p);
+
+		TextField nameField2 = getTextField2("name2", "Enter name2", nameValidatorVaadin, new BindingValidationStatusHandler() {
+			@Override
+			public void statusChange(BindingValidationStatus<?> status) {
+				if(status.isError()){
+					System.out.println("Show Error with message"+ status
+							.getMessage());
+				}else{
+					System.out.println("Show Success with message"+ status
+							.getMessage());
+				}
+
+			}
+		}, Person::getFirstName, Person::setFirstName);
+
+		add(nameField,nameField2);
     }
     
   
