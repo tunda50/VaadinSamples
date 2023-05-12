@@ -1,15 +1,18 @@
 package com.vib.vaadin.view;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
-public class Person {
+public class Person implements Serializable {
 
     
     private String firstName;
 
     
     private String lastName;
+
+    private String preferedName;
 
     
     private String email;
@@ -45,11 +48,12 @@ public class Person {
 
    
 
-	public Person(String firstName, String lastName, String email) {
+	public Person(String firstName, String lastName, String preferedName, String email) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.email = email;
+        this.preferedName = preferedName;
+        this.email = email;
 	}
 
 	public Person(Integer id,String firstName, String lastName, String email) {
@@ -189,5 +193,13 @@ public class Person {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getPreferedName() {
+        return preferedName;
+    }
+
+    public void setPreferedName(String preferedName) {
+        this.preferedName = preferedName;
     }
 }

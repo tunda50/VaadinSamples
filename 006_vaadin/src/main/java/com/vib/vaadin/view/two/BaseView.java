@@ -1,5 +1,7 @@
 package com.vib.vaadin.view.two;
 
+import java.io.Serializable;
+
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -9,12 +11,39 @@ import com.vaadin.flow.data.binder.*;
 import com.vaadin.flow.data.validator.RegexpValidator;
 import com.vaadin.flow.function.ValueProvider;
 import com.vib.vaadin.view.two.BinderExample.Person;
+import com.vib.vaadin.view.two.validators.DataValidator;
 import com.vib.vaadin.view.two.validators.MyValidator;
 import com.vib.vaadin.view.two.validators.NameValidatorVaadin;
 
-public class BaseView<T>  extends VerticalLayout {
+public class BaseView<T>  extends VerticalLayout implements Serializable {
+	
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	Binder<T> binder = new Binder<>();
+
+	public TextField getTextField3(String header, String placeholder, DataValidator validator) {
+		TextField nameField = new TextField(header);
+		nameField.setMaxLength(50); // Set maximum length for the name field
+		nameField.setRequiredIndicatorVisible(true); // Make the field required
+		nameField.setPlaceholder(placeholder);
+
+
+		// Add a value change listener to the name field to handle validation results
+		nameField.addValueChangeListener(event -> {
+			boolean isValid=validator.validate(event.getSource(),event.getValue());
+			if(isValid) {
+				System.out.println("Set value in Bean");
+			}else {
+				System.out.println("Don't set value in Bean");
+			}
+		});
+
+		return nameField;
+	}
+
 	public TextField getTextField(String header,String placeholder,MyValidator validator) {
 		TextField nameField = new TextField(header);
     	nameField.setMaxLength(50); // Set maximum length for the name field

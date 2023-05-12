@@ -1,29 +1,60 @@
 package com.vib.vaadin.view.two;
-import com.vaadin.flow.component.Text;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.dialog.Dialog;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import ch.qos.logback.core.net.SyslogOutputStream;
+
+import java.io.Serializable;
+
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.*;
-import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 import com.vib.vaadin.view.Person;
-import com.vib.vaadin.view.two.validators.NameValidator;
-import com.vib.vaadin.view.two.validators.NameValidatorVaadin;
+import com.vib.vaadin.view.two.validators.*;
 
 
 @Route("validatorExample")
-public class ValidatorExample extends BaseView<Person> {
+public class ValidatorExample extends BaseView<Person>  implements Serializable {
+	
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
     
    
 
     
     public ValidatorExample() {
     	
-    	Person p = new Person("vibhor", "bhardwaj", "vibhor.bhardwaj@gmail.com");
+    	Person p = new Person("vibhor", "bhardwaj", "preferedName", "vibhor.bhardwaj@gmail.com");
 
+		ValidationCallback callback = new ValidationCallback() {
+			@Override
+			public void onFailure(Component source,String errorMessage) {
+				((TextField)source).focus();
+				((TextField)source).clear();
+				System.out.println(errorMessage);
+			}
+		};
+
+		DataValidator firstNameValidator = new DataValidator.ValidatorBuilder(callback)
+				.addHandler(new SizeValidator(callback,5))
+				.addHandler(new FirstNameValidator(callback,p))
+				.build();
+
+		DataValidator lastNameValidator = new DataValidator.ValidatorBuilder(callback)
+				.addHandler(new SizeValidator(callback,5))
+				.addHandler(new LastNameValidator(callback,p))
+				.build();
+
+		DataValidator preferedNameValidator = new DataValidator.ValidatorBuilder(callback)
+				.addHandler(new SizeValidator(callback,5))
+				.addHandler(new PreferedNameValidator(callback,p))
+				.build();
+
+		TextField firstName = getTextField3("FirstName", "Enter F",firstNameValidator);
+
+		TextField lastName = getTextField3("LastName", "Enter Last",lastNameValidator);
+
+		TextField preferedName = getTextField3("PreferedName", "Enter Prefered",preferedNameValidator);
     	TextField nameField = getTextField("Name", "Enter Name",new NameValidator(p) {
 			
 			@Override
@@ -52,8 +83,8 @@ public class ValidatorExample extends BaseView<Person> {
 
 			}
 		}, Person::getFirstName, Person::setFirstName);
-
-		add(nameField,nameField2);
+		System.out.println("XYZjjjmnoPPQRSTUVWX");
+		add(firstName,lastName,preferedName);
     }
     
   
