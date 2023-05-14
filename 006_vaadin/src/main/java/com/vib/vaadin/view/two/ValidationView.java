@@ -2,6 +2,7 @@ package com.vib.vaadin.view.two;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -9,11 +10,9 @@ import com.vib.vaadin.view.Person;
 import com.vib.vaadin.view.validator.framework.DataValidationCallback;
 import com.vib.vaadin.view.validator.framework.DataValidationResult;
 import com.vib.vaadin.view.validator.framework.DataValidator;
+import com.vib.vaadin.view.validator.framework.DataValidatorType;
 import com.vib.vaadin.view.validator.framework.ValidatableSetter;
-import com.vib.vaadin.view.validators.FirstNameValidator;
-import com.vib.vaadin.view.validators.LastNameValidator;
-import com.vib.vaadin.view.validators.PreferedNameValidator;
-import com.vaadin.flow.component.html.Label;
+import com.vib.vaadin.view.validators.PeopleDataValidatorFactory;
 
 public class ValidationView extends DetailComponent<Person> {
 	
@@ -50,23 +49,11 @@ public class ValidationView extends DetailComponent<Person> {
 
 		};
 
-		DataValidator<TextField,String> firstNameValidator = new DataValidator.ValidatorBuilder<TextField,String>()
-				//.addValidator(new SizeValidator(5))
-				.addValidator(new FirstNameValidator(data))
-				.addCallback(callback)
-				.build();
+		DataValidator<TextField,String> firstNameValidator = PeopleDataValidatorFactory.createValidator(DataValidatorType.FIRST_NAME, callback, data);
 
-		DataValidator<TextField,String> preferedNameValidator = new DataValidator.ValidatorBuilder<TextField,String>()
-				//.addValidator(new SizeValidator(7))
-				.addValidator(new PreferedNameValidator(data))
-				.addCallback(callback)
-				.build();
+		DataValidator<TextField,String> preferedNameValidator = PeopleDataValidatorFactory.createValidator(DataValidatorType.PREFERED_NAME, callback, data);
 
-		DataValidator<TextField,String> lastNameValidator = new DataValidator.ValidatorBuilder<TextField,String>()
-				//.addValidator(new SizeValidator(8))
-				.addValidator(new LastNameValidator(data))
-				.addCallback(callback)
-				.build();
+		DataValidator<TextField,String> lastNameValidator = PeopleDataValidatorFactory.createValidator(DataValidatorType.LAST_NAME, callback, data);
 		
 		ValidatableSetter<TextField, Person, String> firstNameSetter= new ValidatableSetter<>(firstNameValidator, Person::setFirstName);
 		ValidatableSetter<TextField, Person, String> lastNamesetter= new ValidatableSetter<>(lastNameValidator, Person::setLastName);
