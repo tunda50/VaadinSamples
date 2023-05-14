@@ -1,17 +1,19 @@
-package com.vib.vaadin.view.two.validators;
+package com.vib.vaadin.view.validators;
 
+import com.vaadin.flow.component.textfield.TextField;
 import com.vib.vaadin.view.Person;
+import com.vib.vaadin.view.validator.framework.DataValidator;
 
-public class PreferedNameValidator extends DataValidator {
+public class PreferedNameValidator extends DataValidator<TextField,String> {
 
     private Person person;
-    public PreferedNameValidator(ValidationCallback callback, Person p){
-        super(callback);
+    public PreferedNameValidator(Person p){
         this.person=p;
     }
 
     @Override
     protected boolean isValid(String request) {
+    	System.out.println("Prefered Name validator invocked:"+request);
         if(request==null){
             return true;
         }

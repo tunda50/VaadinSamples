@@ -1,16 +1,18 @@
-package com.vib.vaadin.view.two.validators;
+package com.vib.vaadin.view.validators;
 
 import java.io.Serializable;
 
-public class SizeValidator extends DataValidator implements Serializable {
+import com.vaadin.flow.component.textfield.TextField;
+import com.vib.vaadin.view.validator.framework.DataValidator;
+
+public class SizeValidator extends DataValidator<TextField,String> implements Serializable {
 	
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private int requiredSize;
-    public SizeValidator(ValidationCallback callback, int requiredSize){
-        super(callback);
+    public SizeValidator(int requiredSize){
         this.requiredSize=requiredSize;
     }
     @Override

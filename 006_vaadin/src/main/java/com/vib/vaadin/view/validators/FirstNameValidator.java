@@ -1,17 +1,23 @@
-package com.vib.vaadin.view.two.validators;
+package com.vib.vaadin.view.validators;
 
+import com.vaadin.flow.component.textfield.TextField;
 import com.vib.vaadin.view.Person;
+import com.vib.vaadin.view.validator.framework.DataValidator;
 
-public class FirstNameValidator extends DataValidator {
+public class FirstNameValidator extends DataValidator<TextField,String> {
 
-    private Person person;
-    public FirstNameValidator(ValidationCallback callback, Person p){
-        super(callback);
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Person person;
+    public FirstNameValidator(Person p){
         this.person=p;
     }
 
     @Override
     protected boolean isValid(String request) {
+    	System.out.println("First Name validator invocked:"+request);
         if(request==null){
             return true;
         }
@@ -25,4 +31,5 @@ public class FirstNameValidator extends DataValidator {
     protected String errorMessageOnFailure(String request) {
         return "First Name should not match Prefered Name:"+person.getPreferedName();
     }
+
 }

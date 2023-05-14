@@ -1,4 +1,4 @@
-package com.vib.vaadin.view.two.validators;
+package com.vib.vaadin.view.validators;
 
 import com.vaadin.flow.data.binder.ValidationResult;
 import com.vaadin.flow.data.binder.Validator;
