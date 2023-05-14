@@ -45,15 +45,17 @@ public class Person implements Serializable {
 
     
     private String status;
+    
+    private boolean deceased;
 
    
 
-	public Person(String firstName, String lastName, String preferedName, String email) {
+	public Person(String firstName, String lastName, String preferedName, boolean deceased) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
         this.preferedName = preferedName;
-        this.email = email;
+        this.setDeceased(deceased);
 	}
 
 	public Person(Integer id,String firstName, String lastName, String email) {
@@ -202,4 +204,12 @@ public class Person implements Serializable {
     public void setPreferedName(String preferedName) {
         this.preferedName = preferedName;
     }
+
+	public boolean isDeceased() {
+		return deceased;
+	}
+
+	public void setDeceased(boolean deceased) {
+		this.deceased = deceased;
+	}
 }

@@ -1,6 +1,7 @@
 package com.vib.vaadin.view.two;
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -12,7 +13,10 @@ import com.vib.vaadin.view.validator.framework.DataValidationResult;
 import com.vib.vaadin.view.validator.framework.DataValidator;
 import com.vib.vaadin.view.validator.framework.DataValidatorType;
 import com.vib.vaadin.view.validator.framework.ValidatableSetter;
+import com.vib.vaadin.view.validators.DeceasedValidator;
+import com.vib.vaadin.view.validators.FirstNameValidator;
 import com.vib.vaadin.view.validators.PeopleDataValidatorFactory;
+import com.vib.vaadin.view.validators.SizeValidator;
 
 public class ValidationView extends DetailComponent<Person> {
 	
@@ -29,10 +33,30 @@ public class ValidationView extends DetailComponent<Person> {
 
 		DataValidationCallback<TextField> callback = new DataValidationCallback<TextField>() {
 
-			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onFailure(DataValidationResult<TextField> result) {
+				System.out.println("Show Dialog error message with:" + result.getErrorMessage());
+				openDialog(new MyCallback() {
+					
+					@Override
+					public void onOk() {
+						if (result.hasSource()) {
+							//result.getSource().clear();
+							result.getSource().focus();
+						}
+					}
+				}, result.getErrorMessage());
+				
+			}
+
+		};
+		
+		DataValidationCallback<Checkbox> callbackCheckbox = new DataValidationCallback<Checkbox>() {
+
+
+			@Override
+			public void onFailure(DataValidationResult<Checkbox> result) {
 				System.out.println("Show Dialog error message with:" + result.getErrorMessage());
 				openDialog(new MyCallback() {
 					
@@ -55,9 +79,15 @@ public class ValidationView extends DetailComponent<Person> {
 
 		DataValidator<TextField,String> lastNameValidator = PeopleDataValidatorFactory.createValidator(DataValidatorType.LAST_NAME, callback, data);
 		
+		DataValidator<Checkbox,Boolean> deceasedValidator = new DataValidator.ValidatorBuilder<Checkbox,Boolean>().addValidator(new DeceasedValidator(data))
+				.addCallback(callbackCheckbox).build();
+
+		
 		ValidatableSetter<TextField, Person, String> firstNameSetter= new ValidatableSetter<>(firstNameValidator, Person::setFirstName);
 		ValidatableSetter<TextField, Person, String> lastNamesetter= new ValidatableSetter<>(lastNameValidator, Person::setLastName);
 		ValidatableSetter<TextField, Person, String> preferedNameSetter= new ValidatableSetter<>(preferedNameValidator, Person::setPreferedName);
+		ValidatableSetter<Checkbox, Person, Boolean> deceasedSetter= new ValidatableSetter<>(deceasedValidator, Person::setDeceased);
+
 
 		TextField firstName = getTextFieldCustom("FirstName", "Enter F", Person::getFirstName, firstNameSetter,
 				firstNameValidator);
@@ -69,6 +99,8 @@ public class ValidationView extends DetailComponent<Person> {
 				preferedNameSetter, preferedNameValidator);
 		
 		
+		Checkbox deceasedFlag = getCheckboxCustom("Deceased Flag", Person::isDeceased,
+				deceasedSetter, deceasedValidator);
 		
 //		TextField firstName = getTextFieldCustom("FirstName", "Enter F", Person::getFirstName, Person::setFirstName,
 //				firstNameValidator);
@@ -95,7 +127,7 @@ public class ValidationView extends DetailComponent<Person> {
 //					}
 //				}, Person::getFirstName, Person::setFirstName);
 
-		add(firstName, lastName, preferedName);
+		add(firstName, lastName, preferedName,deceasedFlag);
 	}
 	
 	

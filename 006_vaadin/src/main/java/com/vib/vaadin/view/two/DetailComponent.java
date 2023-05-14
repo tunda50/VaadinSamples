@@ -2,6 +2,7 @@ package com.vib.vaadin.view.two;
 
 import java.io.Serializable;
 
+import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
@@ -51,6 +52,25 @@ public class DetailComponent<T>  extends VerticalLayout implements Serializable 
 		return nameField;
 	}
 
+	public Checkbox getCheckboxCustom(String header,ValueProvider<T,Boolean> getter, Setter<T,Boolean> setter ,DataValidator<Checkbox,Boolean> validator) {
+		Checkbox checkbox = new Checkbox(header);
+		validator.setSource(checkbox);
+		binder.forField(checkbox).bind(getter, setter);
+
+		
+		// Add a value change listener to the name field to handle validation results
+		checkbox.addValueChangeListener(event -> {
+			if(eventEnabled) {
+			try {
+				binder.writeBean(data);
+			} catch (ValidationException e) {
+				e.printStackTrace();
+			}
+			}
+		});
+
+		return checkbox;
+	}
 	
 
 //	public TextField getTextField(String header, String placeholder, Validator<String> validator, BindingValidationStatusHandler validationStatusHandler, ValueProvider<T,String> getter, Setter<T,String> setter) {

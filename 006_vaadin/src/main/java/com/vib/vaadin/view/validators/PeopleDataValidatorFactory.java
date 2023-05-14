@@ -12,15 +12,14 @@ public class PeopleDataValidatorFactory {
 		switch (type) {
 		case FIRST_NAME:
 
-			return new DataValidator.ValidatorBuilder<TextField, String>().addValidator(new SizeValidator(2))
+			return new DataValidator.ValidatorBuilder<TextField, String>().addValidator(new SizeValidator(5))
 					.addValidator(new FirstNameValidator(data)).addCallback(callback).build();
 
 		case LAST_NAME:
-
-			return new DataValidator.ValidatorBuilder<TextField, String>().addValidator(new SizeValidator(8))
+			return new DataValidator.ValidatorBuilder<TextField, String>().addValidator(new SizeValidator(5))
 					.addValidator(new LastNameValidator(data)).addCallback(callback).build();
 		case PREFERED_NAME:
-			return new DataValidator.ValidatorBuilder<TextField, String>().addValidator(new SizeValidator(7))
+			return new DataValidator.ValidatorBuilder<TextField, String>().addValidator(new SizeValidator(5))
 					.addValidator(new PreferedNameValidator(data)).addCallback(callback).build();
 
 		}
